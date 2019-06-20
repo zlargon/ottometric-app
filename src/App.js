@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="container">
       <header>
-        header
+        <h2>OTTOMETRIC</h2>
       </header>
       <section>
         <div className="google-map">
