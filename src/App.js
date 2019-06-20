@@ -1,10 +1,11 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import Camera from './Camera';
 import './App.css';
 
 const Marker = ({ text }) => <div>{text}</div>;
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <header>
@@ -26,7 +27,9 @@ function App() {
           </div>
           <div className="aside-down">
             <div className="camera">
-              camera
+              <Camera
+                speed={100}
+                imageFolder="/2011_09_26/2011_09_26_drive_0052_sync/image_00/data/" />
             </div>
             <div className="information">
               information
