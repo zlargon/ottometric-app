@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import Camera from './Camera';
 import './App.css';
 
-const Marker = ({ text }) => <div>{text}</div>;
+const Marker = ({ text }) => <div className="marker">{text}</div>;
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
             defaultCenter={{lat: 42.3418206, lng: -71.091735}}
             defaultZoom={11}>
 
-            <Marker lat={42.3418206} lng={-71.091735} text="My Marker" />
+            <Marker lat={42.3418206} lng={-71.091735} text="my position" />
           </GoogleMapReact>
         </div>
         <aside>
