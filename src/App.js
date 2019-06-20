@@ -1,5 +1,8 @@
 import React from 'react';
+import GoogleMapReact from 'google-map-react';
 import './App.css';
+
+const Marker = ({ text }) => <div>{text}</div>;
 
 function App() {
   return (
@@ -9,7 +12,13 @@ function App() {
       </header>
       <section>
         <div className="google-map">
-          google map
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: 'AIzaSyD6qTu55F0bSv_Bj05mxZ8ffvxyP2rzxO0' }}
+            defaultCenter={{lat: 42.3418206, lng: -71.091735}}
+            defaultZoom={11}>
+
+            <Marker lat={42.3418206} lng={-71.091735} text="My Marker" />
+          </GoogleMapReact>
         </div>
         <aside>
           <div className="lidar">
