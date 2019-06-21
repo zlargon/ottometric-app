@@ -14,28 +14,28 @@ https://zlargon.github.io/ottometric-app
 
 2. unzip the file and put folder to `public/drive_data/`
 
-![Drive Data](https://user-images.githubusercontent.com/2791834/59912342-df04be00-93e3-11e9-8b47-15a9a8d111d0.png)
+    ![Drive Data](https://user-images.githubusercontent.com/2791834/59929843-a549ac80-940f-11e9-9e84-b1549840ecbe.png)
 
 3. (OPTIONAL) setup Google Map API Key
 
-- Register for the API Key https://developers.google.com/maps/documentation/javascript/get-api-key
-- add the API Key to `.env`
+    - Register for the API Key https://developers.google.com/maps/documentation/javascript/get-api-key
+    - add the API Key to `.env`
 
-```
-REACT_APP_GOOGLE_MAP_API_KEY=xxxxxxxxxxx
-```
+    ```
+    REACT_APP_GOOGLE_MAP_API_KEY=xxxxxxxxxxx
+    ```
 
 4. install node packages depandencies by `yarn`
 
-```bash
-yarn install
-```
+    ```bash
+    yarn install
+    ```
 
 5. start react develop server
 
-```bash
-yarn start
-```
+    ```bash
+    yarn start
+    ```
 
 6. open http://localhost:3000/ in browser
 
