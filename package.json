@@ -8,13 +8,10 @@
     "react-dom": "^16.8.6",
     "react-google-maps": "^9.4.5",
     "react-scripts": "3.0.1",
-    "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0",
     "three": "^0.105.2",
     "three-orbitcontrols": "^2.102.1"
   },
   "scripts": {
-    "server": "node ./server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

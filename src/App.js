@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { GoogleMap, Polyline, withGoogleMap, withScriptjs } from 'react-google-maps';
-import openSocket from 'socket.io-client';
 import * as util from './utils/map';
 import './App.css';
 
@@ -17,9 +16,6 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
-    this.positions = [];
-    this.socket = openSocket('http://localhost:6999');
-    this.fileIndex = 0;
     this.geometry = util.generateGeometry();
   }
   state = {
@@ -30,7 +26,6 @@ export default class Main extends Component {
 
   componentDidMount() {
     this.map = util.generateScene();
-
     this.container.current.appendChild(this.map.renderer.domElement);
 
     const animate = () => {
@@ -38,57 +33,7 @@ export default class Main extends Component {
       this.map.renderer.render(this.map.scene, this.map.camera);
     };
 
-    const updateFrame = () => new Promise(() => {
-      if (this.lastPointCloud) {
-        this.map.scene.remove(this.lastPointCloud);
-      }
-      this.lastPointCloud = util.generatePointCloud(this.geometry);
-
-      this.geometry.dispose();
-      this.geometry = util.generateGeometry();
-
-      this.map.scene.add(this.lastPointCloud);
-    });
-
-    const socketEnd = (geolocation) => {
-      console.log(geolocation);
-      updateFrame();
-      const currentLatLng = { lat: Number(geolocation[0]), lng: Number(geolocation[1]) };
-      const polylinePath = [...this.state.polylinePath, currentLatLng];
-      this.setState({ currentLatLng, polylinePath });
-      // if (!this.pause) {
-      //   this.nextShot();
-      // }
-    };
-
-    const socketPosition = (positionArr) => {
-      console.log(positionArr);
-      const vectArray = util.transferArrayBufferToVect(positionArr);
-      util.pushDataToGeometry(this.geometry, vectArray);
-    };
-
     animate();
-
-    // this.socket.on('start', () => { this.setState({ loading: true }); });
-    this.socket.on('position', socketPosition);
-    this.socket.on('end', socketEnd);
-  }
-
-  // play
-  nextShot = () => {
-    let newIndex = this.fileIndex + 1;
-    if (newIndex > 153) {
-      newIndex = 0;
-      this.setState({ polylinePath: [] });
-    }
-    this.pause = false;
-    this.fileIndex = newIndex;
-    this.socket.emit('getPosition', newIndex);
-  }
-
-  // pause
-  togglePause = () => {
-    this.pause = true;
   }
 
   test = async () => {
@@ -126,9 +71,6 @@ export default class Main extends Component {
         const polylinePath = [...this.state.polylinePath, currentLatLng];
         this.setState({ currentLatLng, polylinePath });
       });
-
-    // await fetch(`/drive_data/image_00/data/${no}.png`)
-
   }
 
   render() {
@@ -162,8 +104,6 @@ export default class Main extends Component {
           </section>
         </main>
         <footer>
-          <button onClick={this.nextShot}>play</button>
-          <button onClick={this.togglePause}>pause</button>
           <button onClick={this.test}>test</button>
         </footer>
       </div>
