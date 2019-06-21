@@ -12,12 +12,17 @@ const MapWithPolyline = withScriptjs(withGoogleMap(props => (
   </GoogleMap>
 )));
 
+const delay = (ms) => new Promise((solve) => {
+  setTimeout(solve, ms);
+});
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
     this.geometry = util.generateGeometry();
   }
+
   state = {
     polylinePath: [],
     currentLatLng: { lat: 49.011212804408, lng: 8.4228850417969 },
@@ -34,18 +39,13 @@ export default class App extends React.Component {
     };
 
     animate();
-    this.fetchData();
+    this.start();
   }
 
   fetchData = async () => {
     const no = ('0000000000' + this.state.count).slice(-10);
-    console.log(no);
 
-    this.setState({
-      count: this.state.count + 1
-    });
-
-    // update radar
+    // 1. update radar
     await fetch(`/drive_data/velodyne_points/data/${no}.bin`)
       .then(res => res.arrayBuffer())
       .then(positionArr => {
@@ -63,7 +63,7 @@ export default class App extends React.Component {
         this.map.scene.add(this.lastPointCloud);
       });
 
-    // update google map
+    // 2. update google map
     await fetch(`/drive_data/oxts/data/${no}.txt`)
       .then(res => res.text())
       .then(file => file.split(' ', 2))
@@ -72,6 +72,23 @@ export default class App extends React.Component {
         const polylinePath = [...this.state.polylinePath, currentLatLng];
         this.setState({ currentLatLng, polylinePath });
       });
+
+    // 3. update state count
+    console.log(no);
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
+
+  start = async () => {
+    try {
+      for (;;) {
+        await this.fetchData();
+        await delay(100);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
@@ -105,7 +122,7 @@ export default class App extends React.Component {
           </section>
         </main>
         <footer>
-          <button onClick={this.fetchData}>fetchData</button>
+          <button onClick={this.fetchData}>Start</button>
         </footer>
       </div>
     );
