@@ -27,14 +27,14 @@ export default class App extends React.Component {
     super(props);
     this.container = React.createRef();
     this.geometry = util.generateGeometry();
-    this.play = false;
   }
 
   state = {
     polylinePath: [],
     currentLatLng: { lat: 49.011212804408, lng: 8.4228850417969 },
     count: 0,
-    imageFolder: options[0]
+    imageFolder: options[0],
+    play: false
   }
 
   componentDidMount = () => {
@@ -54,7 +54,7 @@ export default class App extends React.Component {
     const no = ('0000000000' + this.state.count).slice(-10);
 
     // 1. update ridar
-    const update_ridar = fetch(process.env.PUBLIC_URL + `/drive_data/velodyne_points/data/${no}.bin`)
+    await fetch(process.env.PUBLIC_URL + `/drive_data/velodyne_points/data/${no}.bin`)
       .then(res => res.arrayBuffer())
       .then(positionArr => {
         const vectArray = util.transferArrayBufferToVect(positionArr);
@@ -72,7 +72,7 @@ export default class App extends React.Component {
       });
 
     // 2. update google map
-    const update_map = fetch(process.env.PUBLIC_URL + `/drive_data/oxts/data/${no}.txt`)
+    await fetch(process.env.PUBLIC_URL + `/drive_data/oxts/data/${no}.txt`)
       .then(res => res.text())
       .then(file => file.split(' ', 2))
       .then(geolocation => {
@@ -80,8 +80,6 @@ export default class App extends React.Component {
         const polylinePath = [...this.state.polylinePath, currentLatLng];
         this.setState({ currentLatLng, polylinePath });
       });
-
-    await Promise.all([update_ridar, update_map]);
 
     // 3. update state count
     console.log(no);
