@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ottometric-app/precache-manifest.1abd4b17c9b9e57c611fbc0b6a6cb420.js"
+  "/ottometric-app/precache-manifest.18e2a0609c63447fbd697d1cb0463b2a.js"
 );
 
 self.addEventListener('message', (event) => {
