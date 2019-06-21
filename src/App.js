@@ -20,7 +20,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
+    this.image = React.createRef();
+    this.imageInfo = React.createRef();
     this.geometry = util.generateGeometry();
+    this.play = false;
   }
 
   state = {
@@ -73,7 +76,11 @@ export default class App extends React.Component {
         this.setState({ currentLatLng, polylinePath });
       });
 
-    // 3. update state count
+    // 3. update image and imageInfo
+    this.image.current.src = `/drive_data/image_00/data/${no}.png`;
+    this.imageInfo.current.innerText = `${no}.png`;
+
+    // 4. update state count
     console.log(no);
     this.setState({
       count: this.state.count + 1
@@ -81,18 +88,37 @@ export default class App extends React.Component {
   }
 
   start = async () => {
+    if (this.state.play) return;
+
+    this.setState({ play: true });
     try {
       for (;;) {
         await this.fetchData();
         await delay(100);
+        if (this.state.play === false) break;
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      this.setState({ play: false });
     }
   }
 
+  stop = () => {
+    this.setState({ play: false });
+  }
+
+  reset = () => {
+    this.setState({
+      polylinePath: [],
+      currentLatLng: { lat: 49.011212804408, lng: 8.4228850417969 },
+      count: 0
+    });
+
+    this.imageInfo.current.innerText = '0000000000.png';
+  }
+
   render() {
-    const no = ('0000000000' + (this.state.count - 1)).slice(-10);
     return (
       <div className="app">
         <header>
@@ -113,10 +139,10 @@ export default class App extends React.Component {
             <div id="lidar" ref={this.container}></div>
             <aside>
               <div className="camera">
-                <img src={`/drive_data/image_00/data/${no}.png`} alt=""/>
+                <img ref={this.image} alt=""/>
               </div>
               <div className="information">
-                <div><b>Photo:</b><br/> /image_00/data/{no}.png</div>
+                <div><b>Photo:</b><br/><span ref={this.imageInfo}></span></div>
                 <div><b>Latitude:</b><br/> {this.state.currentLatLng.lat}</div>
                 <div><b>Longitude:</b><br/> {this.state.currentLatLng.lng}</div>
               </div>
@@ -124,7 +150,9 @@ export default class App extends React.Component {
           </section>
         </main>
         <footer>
-          <button onClick={this.fetchData}>Start</button>
+          { !this.state.play && <button onClick={this.start}>start</button> }
+          {  this.state.play && <button onClick={this.stop}>stop</button> }
+          <button onClick={this.reset}>reset</button>
         </footer>
       </div>
     );
