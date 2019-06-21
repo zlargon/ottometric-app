@@ -2,6 +2,7 @@
   width: 100%;
   margin: auto;
   font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  border: 1px solid black;
 }
 
 header {
@@ -73,7 +74,6 @@ aside {
 
 .information {
   width: 25%;
-  border: 1px solid black;
 }
 
 .information > * {
@@ -81,7 +81,7 @@ aside {
 }
 
 footer {
-  border: 1px solid black;
+  border-top: 1px solid black;
   width: 100%;
   height: 70px;
 }
