@@ -3,6 +3,7 @@ import { GoogleMap, Polyline, withGoogleMap, withScriptjs } from 'react-google-m
 import * as util from './utils';
 import './App.css';
 
+// add Google Map API Key here
 // https://developers.google.com/maps/documentation/javascript/get-api-key
 const googleMapApiKey = '';
 
