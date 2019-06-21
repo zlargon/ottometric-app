@@ -53,8 +53,8 @@ export default class App extends React.Component {
   fetchData = async () => {
     const no = ('0000000000' + this.state.count).slice(-10);
 
-    // 1. update radar
-    await fetch(process.env.PUBLIC_URL + `/drive_data/velodyne_points/data/${no}.bin`)
+    // 1. update ridar
+    const update_ridar = fetch(process.env.PUBLIC_URL + `/drive_data/velodyne_points/data/${no}.bin`)
       .then(res => res.arrayBuffer())
       .then(positionArr => {
         const vectArray = util.transferArrayBufferToVect(positionArr);
@@ -72,7 +72,7 @@ export default class App extends React.Component {
       });
 
     // 2. update google map
-    await fetch(process.env.PUBLIC_URL + `/drive_data/oxts/data/${no}.txt`)
+    const update_map = fetch(process.env.PUBLIC_URL + `/drive_data/oxts/data/${no}.txt`)
       .then(res => res.text())
       .then(file => file.split(' ', 2))
       .then(geolocation => {
@@ -80,6 +80,8 @@ export default class App extends React.Component {
         const polylinePath = [...this.state.polylinePath, currentLatLng];
         this.setState({ currentLatLng, polylinePath });
       });
+
+    await Promise.all([update_ridar, update_map]);
 
     // 3. update state count
     console.log(no);
