@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { GoogleMap, Polyline, withGoogleMap, withScriptjs } from 'react-google-maps';
-import * as util from './utils/map';
+import googleMapApiKey from './googleMapApiKey';
+import * as util from './utils';
 import './App.css';
 
 const MapWithPolyline = withScriptjs(withGoogleMap(props => (
   <GoogleMap
     defaultZoom={20}
-    center={props.currentLatLng}
-  >
+    center={props.currentLatLng}>
     <Polyline path={props.polylinePath} />
   </GoogleMap>
 )));
 
-export default class Main extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
@@ -24,7 +24,7 @@ export default class Main extends Component {
     count: 0
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.map = util.generateScene();
     this.container.current.appendChild(this.map.renderer.domElement);
 
@@ -34,9 +34,10 @@ export default class Main extends Component {
     };
 
     animate();
+    this.fetchData();
   }
 
-  test = async () => {
+  fetchData = async () => {
     const no = ('0000000000' + this.state.count).slice(-10);
     console.log(no);
 
@@ -74,7 +75,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const no = ('0000000000' + this.state.count).slice(-10);
+    const no = ('0000000000' + (this.state.count - 1)).slice(-10);
     return (
       <div className="app">
         <header>
@@ -83,7 +84,7 @@ export default class Main extends Component {
         <main>
           <div className="googlemap">
             <MapWithPolyline
-              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing&key=AIzaSyD6qTu55F0bSv_Bj05mxZ8ffvxyP2rzxO0"
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing&key=${googleMapApiKey}`}
               loadingElement={<div />}
               containerElement={<div style={{ width: '100%', height: '100%' }} />}
               mapElement={<div style={{ width: '100%', height: '100%' }} />}
@@ -95,7 +96,7 @@ export default class Main extends Component {
             <div id="lidar" ref={this.container}></div>
             <aside>
               <div className="camera">
-                <img src={`/drive_data/image_00/data/${no}.png`} />
+                <img src={`/drive_data/image_00/data/${no}.png`} alt=""/>
               </div>
               <div className="information">
                 information
@@ -104,7 +105,7 @@ export default class Main extends Component {
           </section>
         </main>
         <footer>
-          <button onClick={this.test}>test</button>
+          <button onClick={this.fetchData}>fetchData</button>
         </footer>
       </div>
     );
