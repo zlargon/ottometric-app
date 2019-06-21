@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/ottometric-app/static/css/main.413e85ae.chunk.css",
-    "main.js": "/ottometric-app/static/js/main.fb4734bb.chunk.js",
-    "main.js.map": "/ottometric-app/static/js/main.fb4734bb.chunk.js.map",
+    "main.js": "/ottometric-app/static/js/main.067890ed.chunk.js",
+    "main.js.map": "/ottometric-app/static/js/main.067890ed.chunk.js.map",
     "runtime~main.js": "/ottometric-app/static/js/runtime~main.b2c5de89.js",
     "runtime~main.js.map": "/ottometric-app/static/js/runtime~main.b2c5de89.js.map",
     "static/js/2.9b38482c.chunk.js": "/ottometric-app/static/js/2.9b38482c.chunk.js",
     "static/js/2.9b38482c.chunk.js.map": "/ottometric-app/static/js/2.9b38482c.chunk.js.map",
     "index.html": "/ottometric-app/index.html",
-    "precache-manifest.18e2a0609c63447fbd697d1cb0463b2a.js": "/ottometric-app/precache-manifest.18e2a0609c63447fbd697d1cb0463b2a.js",
+    "precache-manifest.a2d36fbd0f01aff09477b29d1143f73a.js": "/ottometric-app/precache-manifest.a2d36fbd0f01aff09477b29d1143f73a.js",
     "service-worker.js": "/ottometric-app/service-worker.js",
     "static/css/main.413e85ae.chunk.css.map": "/ottometric-app/static/css/main.413e85ae.chunk.css.map"
   }

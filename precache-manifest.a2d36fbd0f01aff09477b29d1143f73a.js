@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "78517bd28a72c26e0cf357307c2005a5",
+    "revision": "1d52845e80173b191e7f65cd20348454",
     "url": "/ottometric-app/index.html"
   },
   {
-    "revision": "b6bd285629552e70ac30",
+    "revision": "bc413fb4d9109394e155",
     "url": "/ottometric-app/static/css/main.413e85ae.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ottometric-app/static/js/2.9b38482c.chunk.js"
   },
   {
-    "revision": "b6bd285629552e70ac30",
-    "url": "/ottometric-app/static/js/main.fb4734bb.chunk.js"
+    "revision": "bc413fb4d9109394e155",
+    "url": "/ottometric-app/static/js/main.067890ed.chunk.js"
   },
   {
     "revision": "17ce1f1f2be9e061f788",
