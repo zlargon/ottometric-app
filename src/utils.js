@@ -1,10 +1,7 @@
 import * as THREE from 'three';
-import * as d3 from 'd3';
 import Orbitcontrols from 'three-orbitcontrols';
 
 const chunkSize = 4;
-
-const color = d3.scaleLinear().domain([0, 0.6]).range([d3.rgb(0, 255, 0), d3.rgb(255, 0, 0)]);
 const defaultColor = new THREE.Color('skyblue');
 
 export const transferArrayBufferToVect = (arrBuffer) => {
