@@ -3,10 +3,6 @@ import { GoogleMap, Polyline, withGoogleMap, withScriptjs } from 'react-google-m
 import * as util from './utils';
 import './App.css';
 
-// add Google Map API Key here
-// https://developers.google.com/maps/documentation/javascript/get-api-key
-const googleMapApiKey = '';
-
 const MapWithPolyline = withScriptjs(withGoogleMap(props => (
   <GoogleMap
     defaultZoom={20}
@@ -58,7 +54,7 @@ export default class App extends React.Component {
     const no = ('0000000000' + this.state.count).slice(-10);
 
     // 1. update radar
-    await fetch(`/drive_data/velodyne_points/data/${no}.bin`)
+    await fetch(process.env.PUBLIC_URL + `/drive_data/velodyne_points/data/${no}.bin`)
       .then(res => res.arrayBuffer())
       .then(positionArr => {
         const vectArray = util.transferArrayBufferToVect(positionArr);
@@ -76,7 +72,7 @@ export default class App extends React.Component {
       });
 
     // 2. update google map
-    await fetch(`/drive_data/oxts/data/${no}.txt`)
+    await fetch(process.env.PUBLIC_URL + `/drive_data/oxts/data/${no}.txt`)
       .then(res => res.text())
       .then(file => file.split(' ', 2))
       .then(geolocation => {
@@ -99,7 +95,7 @@ export default class App extends React.Component {
     try {
       for (;;) {
         await this.fetchData();
-        await delay(100);
+        await delay(50);
         if (this.state.play === false) break;
       }
     } catch (e) {
@@ -142,7 +138,7 @@ export default class App extends React.Component {
         <main>
           <div className="googlemap">
             <MapWithPolyline
-              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing&key=${googleMapApiKey}`}
+              googleMapURL={'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing&key=' + process.env.REACT_APP_GOOGLE_MAP_API_KEY}
               loadingElement={<div />}
               containerElement={<div style={{ width: '100%', height: '100%' }} />}
               mapElement={<div style={{ width: '100%', height: '100%' }} />}
@@ -154,7 +150,7 @@ export default class App extends React.Component {
             <div id="lidar" ref={this.container}></div>
             <aside>
               <div className="camera">
-                <img src={`/drive_data/${this.state.imageFolder}/data/${no}.png`} alt=""/>
+                <img src={process.env.PUBLIC_URL + `/drive_data/${this.state.imageFolder}/data/${no}.png`} alt=""/>
               </div>
               <div className="information">
                 <div><b>Photo:</b><br/>{`${no}.png`}</div>

@@ -19,9 +19,11 @@ https://zlargon.github.io/ottometric-app
 3. (OPTIONAL) setup Google Map API Key
 
 - Register for the API Key https://developers.google.com/maps/documentation/javascript/get-api-key
-- add the API Key to `src/App.js`
+- add the API Key to `.env`
 
-![Google Map API Key](https://user-images.githubusercontent.com/2791834/59912298-c09ec280-93e3-11e9-8d92-c4552554ea46.png)
+```
+REACT_APP_GOOGLE_MAP_API_KEY=xxxxxxxxxxx
+```
 
 4. install node packages depandencies by `yarn`
 

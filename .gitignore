@@ -22,5 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#
+# drive_data
 /public/drive_data
+
+# REACT_APP_GOOGLE_MAP_API_KEY
+.env
