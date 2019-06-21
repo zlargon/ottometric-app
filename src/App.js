@@ -1,8 +1,10 @@
 import React from 'react';
 import { GoogleMap, Polyline, withGoogleMap, withScriptjs } from 'react-google-maps';
-import googleMapApiKey from './googleMapApiKey';
 import * as util from './utils';
 import './App.css';
+
+// https://developers.google.com/maps/documentation/javascript/get-api-key
+const googleMapApiKey = '';
 
 const MapWithPolyline = withScriptjs(withGoogleMap(props => (
   <GoogleMap
