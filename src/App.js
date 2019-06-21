@@ -132,7 +132,7 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <header>
-          <div>OTTOMETRIC</div>
+          <div className="logo">OTTOMETRIC</div>
           <select onChange={this.changeImageFolder}>
             { options.map((x, i) => <option key={i} value={x}>{x}</option>) }
           </select>
