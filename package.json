@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "google-map-react": "^1.1.4",
+    "d3": "^5.9.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-google-maps": "^9.4.5",
+    "react-scripts": "3.0.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "three": "^0.105.2",
+    "three-orbitcontrols": "^2.102.1"
   },
   "scripts": {
     "start": "react-scripts start",
