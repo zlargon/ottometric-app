@@ -76,6 +76,10 @@ aside {
   border: 1px solid black;
 }
 
+.information > * {
+  margin: 10px;
+}
+
 footer {
   border: 1px solid black;
   width: 100%;

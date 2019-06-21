@@ -116,7 +116,9 @@ export default class App extends React.Component {
                 <img src={`/drive_data/image_00/data/${no}.png`} alt=""/>
               </div>
               <div className="information">
-                information
+                <div><b>Photo:</b><br/> /image_00/data/{no}.png</div>
+                <div><b>Latitude:</b><br/> {this.state.currentLatLng.lat}</div>
+                <div><b>Longitude:</b><br/> {this.state.currentLatLng.lng}</div>
               </div>
             </aside>
           </section>
