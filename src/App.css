@@ -8,14 +8,16 @@
 header {
   width: 100%;
   background-color: rgb(34, 34, 34);
+  font-size: 20px;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-header h2 {
+header > * {
   color: white;
-  margin-left: 20px;
+  margin: 20px 25px;
 }
 
 main {

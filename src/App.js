@@ -16,12 +16,17 @@ const delay = (ms) => new Promise((solve) => {
   setTimeout(solve, ms);
 });
 
+const options = [
+  'image_00',
+  'image_01',
+  'image_02',
+  'image_03'
+];
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
-    this.image = React.createRef();
-    this.imageInfo = React.createRef();
     this.geometry = util.generateGeometry();
     this.play = false;
   }
@@ -29,7 +34,8 @@ export default class App extends React.Component {
   state = {
     polylinePath: [],
     currentLatLng: { lat: 49.011212804408, lng: 8.4228850417969 },
-    count: 0
+    count: 0,
+    imageFolder: options[0]
   }
 
   componentDidMount = () => {
@@ -76,11 +82,7 @@ export default class App extends React.Component {
         this.setState({ currentLatLng, polylinePath });
       });
 
-    // 3. update image and imageInfo
-    this.image.current.src = `/drive_data/image_00/data/${no}.png`;
-    this.imageInfo.current.innerText = `${no}.png`;
-
-    // 4. update state count
+    // 3. update state count
     console.log(no);
     this.setState({
       count: this.state.count + 1
@@ -114,15 +116,25 @@ export default class App extends React.Component {
       currentLatLng: { lat: 49.011212804408, lng: 8.4228850417969 },
       count: 0
     });
+  }
 
-    this.imageInfo.current.innerText = '0000000000.png';
+  changeImageFolder = (e) => {
+    this.setState({
+      imageFolder: e.target.value
+    });
   }
 
   render() {
+    const count = this.state.count > 0 ? this.state.count - 1 : this.state.count;
+    const no = ('0000000000' + count).slice(-10);
+
     return (
       <div className="app">
         <header>
-          <h2>OTTOMETRIC</h2>
+          <div>OTTOMETRIC</div>
+          <select onChange={this.changeImageFolder}>
+            { options.map((x, i) => <option key={i} value={x}>{x}</option>) }
+          </select>
         </header>
         <main>
           <div className="googlemap">
@@ -139,10 +151,10 @@ export default class App extends React.Component {
             <div id="lidar" ref={this.container}></div>
             <aside>
               <div className="camera">
-                <img ref={this.image} alt=""/>
+                <img src={`/drive_data/${this.state.imageFolder}/data/${no}.png`} alt=""/>
               </div>
               <div className="information">
-                <div><b>Photo:</b><br/><span ref={this.imageInfo}></span></div>
+                <div><b>Photo:</b><br/>{`${no}.png`}</div>
                 <div><b>Latitude:</b><br/> {this.state.currentLatLng.lat}</div>
                 <div><b>Longitude:</b><br/> {this.state.currentLatLng.lng}</div>
               </div>
