@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleMap, Polyline, withGoogleMap, withScriptjs } from 'react-google-maps';
 import * as util from './utils';
-import './App.css';
+import './App.scss';
 
 const MapWithPolyline = withScriptjs(withGoogleMap(props => (
   <GoogleMap
